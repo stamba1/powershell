@@ -33,4 +33,4 @@ $listF = Get-ChildItem -Path $PSScriptRoot -Recurse | Select-String -pattern $pa
   $obj | select-object name , directory, LastwriteTime , length | Out-File -filepath  $PSScriptRoot\modifpatern.txt -Append
   }
 }
- Write-Host "veillez consultez le fichier modif.txt ou modifpatern.txt dans le meme dossier que le script"L
+ Write-Host "veillez consultez le fichier modif.txt ou modifpatern.txt dans le meme dos que le script"L

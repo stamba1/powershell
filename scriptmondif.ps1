@@ -1,0 +1,36 @@
+cls
+Write-Host "1-recherche date"
+Write-Host "2-recherche patern"
+$choix = Read-Host "donner votre choix taper 1 ou 2 "
+if ($choix -eq 1)
+{
+   [int]$HTT = Read-Host "donner le nombre d'heures"
+
+    $list = Get-ChildItem -path  $PSScriptRoot -Recurse
+
+    foreach($fic in $list)
+    {
+     if (($fic.LastWriteTime -gt (Get-Date).AddHours(-$HTT)) -and ($fic.directory))
+
+       {
+
+      #$aff = $fic.Name + "  "  + $fic.LastWriteTime  + "   " + $fic.Directory
+
+      # add-content -path $PSScriptRoot\modif.txt -value $aff
+      $fic |  select-object name , directory, LastwriteTime , length | Out-File -FilePath $PSScriptRoot\modif.txt -Append
+
+       }
+
+    }
+}
+ else
+{
+$patairn = read-host "donner le pattern"
+$listF = Get-ChildItem -Path $PSScriptRoot -Recurse | Select-String -pattern $patairn  | Select-Object path | convert-path
+  foreach($el in $listF)
+  {
+  $obj = Get-Item -Path $el
+  $obj | select-object name , directory, LastwriteTime , length | Out-File -filepath  $PSScriptRoot\modifpatern.txt -Append
+  }
+}
+ Write-Host "veillez consultez le fichier modif.txt ou modifpatern.txt dans le meme dossier que le script"L

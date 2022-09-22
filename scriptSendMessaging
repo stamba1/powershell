@@ -1,0 +1,24 @@
+À moi
+
+cls
+$resul = Get-ChildItem -Path "\\logwire\appstousers\dialogue\PRD\Reporting\out\Bil\VBS\PRE_FTP_VBS" -Name *.afp 
+
+$resul
+ if ($resul.Length -ne 0)
+
+ {
+$body = "alerte il y a des fichiers d'extention .afp"
+ }
+ else 
+ {
+ $body = "pas d'alerte"
+ }
+ $userName = 's.tamba838@zig.univ.sn'
+$password = 'g'
+$securepassword = ConvertTo-SecureString -String $password -AsPlainText -Force 
+$credential = New-Object System.Management.Automation.PSCredential -ArgumentList $username, $securepassword
+
+$destinataires ='elearning.ramdane@gmail.com','ramdane.moh27@yahoo.fr','tambasidou2@gmail.com'
+
+Send-MailMessage -SmtpServer smtp.gmail.com -Port 587   -UseSsl  -From 's.tamba838@zig.univ.sn' -To $destinataires -Subject 'notification serveur' -Body $body -Credential $credential 
+write-host "terminé"

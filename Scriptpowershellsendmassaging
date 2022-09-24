@@ -1,0 +1,11 @@
+#ce script powershell permet d'envoyer les mails d'une boite à l'autre mais il faut activer d'abord la fonction "acces aux applications moins securisées" sur le compte 
+#source.
+$myemail = "tambasidou2@gmail.com"
+$SMTP = "smtp.gmail.com"
+$to = "tambasidou2@gmail.com"
+$subject = "hello"
+$Body = "je vous salue"
+$creds = (Get-Credential -Credential "$myemail")
+
+Start-Sleep 2
+Send-MailMessage -To $to -From $myemail -Subject $subject -Body $Body -SmtpServer $SMTP -Credential $creds -UseSsl -Port 587 -DeliveryNotificationOption Never

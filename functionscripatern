@@ -8,6 +8,7 @@ if ($choix -eq "date")
 
     $list = Get-ChildItem -path  $PSScriptRoot -Recurse 
 
+
     foreach($fic in $list)
     {
      if (($fic.LastWriteTime -gt (Get-Date).AddHours(-$HTT)) -and ($fic.directory))
